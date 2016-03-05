@@ -20,8 +20,21 @@ class Controller extends BaseController
         return view('index',  ['countries' => $countries]);
     }
 
-    public function getCities() {
-        return response()->json(City::where('country_id', '=', Input::get("country_id"))->get());
+    public function getCities()
+    {
+        /** @var \App\Country $country */
+        $country = Country::find(Input::get('country_id'));
+
+        if (!is_null($country)) {
+            $data = [
+                'cities' => $country->cities()->getResults(),
+                'country_name' => $country->name,
+            ];
+
+            return response()->json($data);
+        }
+
+        return response('', 500);
     }
 
     public function store()

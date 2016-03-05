@@ -33,7 +33,7 @@
 
             <div class="col-xs-5 col-xs-offset-1">
                 <div class="panel panel-default" v-if="cities.length > 0">
-                    <div class="panel-heading">@{{ selectedCountry }}</div>
+                    <div class="panel-heading">@{{ selectedCountryName }}</div>
 
                     <ul class="list-group">
                         <li class="list-group-item" v-for="city in cities">@{{ city.name }}</li>
@@ -64,7 +64,8 @@
                 countries: {!! json_encode($countries) !!},
                 cityInputName: '',
                 request: '',
-                response: ''
+                response: '',
+                selectedCountryName: "{{ $countries->first()->name }}"
             },
             methods: {
                 saveCity: function() {
@@ -96,7 +97,6 @@
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
                     });
-
                 },
                 countryChanged: function() {
                     var data = {
@@ -113,8 +113,9 @@
                         async: true,
                         encode: true
                     }).done(function(data, textStatus, jqXHR) {
-                        obj.response = JSON.stringify(data, null, 2);
-                        obj.cities = data;
+                        obj.response = JSON.stringify(data);
+                        obj.cities = data.cities;
+                        obj.selectedCountryName = data.country_name;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         obj.response = textStatus;
                     }).always(function(data, textStatus, errorThrown) {
