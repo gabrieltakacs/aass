@@ -88,8 +88,22 @@
 
                 },
                 countryChanged: function() {
-                    // TODO: implement
-
+                    $.ajax({
+                        type: 'GET',
+                        url: "{{ action('Controller@getCities') }}",
+                        data: {
+                            'country_id': this.selectedCountryId
+                        },
+                        dataType: 'json',
+                        async: true,
+                        encode: true
+                    }).done(function(data, textStatus, jqXHR) {
+                        obj.cities = data;
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                    }).always(function(data, textStatus, errorThrown) {
+                        console.log(data);
+                    });
                     console.log('country changed!');
                }
             }
