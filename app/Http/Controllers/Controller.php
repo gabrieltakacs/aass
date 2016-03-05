@@ -24,17 +24,20 @@ class Controller extends BaseController
         return response()->json(City::where('country_id', '=', Input::get("country_id"))->get());
     }
 
-    public function store(){
+    public function store()
+    {
+        /** @var \App\Country $country */
+        $country = Country::find(Input::get('country_id'))->first();
 
-        $city=new City();
-
-        $city->country_id = Input::get("country_id");
-
-        if(Input::has('name'))
+        if (!is_null($country)) {
+            $city = new City();
+            $city->country()->associate($country);
             $city->name = Input::get("name");
+            $city->save();
 
-        $city->save();
+            return response()->json($country->cities()->getResults());
+        }
 
-        return self::index();
+        return response('', 500);
     }
 }

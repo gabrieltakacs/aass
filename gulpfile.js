@@ -2,7 +2,8 @@ var elixir = require('laravel-elixir');
 var app_root_path = '../../../';
 var paths = {
     'jquery':       app_root_path + 'node_modules/jquery/',
-    'bootstrap':    app_root_path + 'vendor/twbs/bootstrap-sass/'
+    'bootstrap':    app_root_path + 'vendor/twbs/bootstrap-sass/',
+    'vue':          app_root_path + 'node_modules/vue/'
 };
 
 elixir(function(mix) {
@@ -19,6 +20,7 @@ elixir(function(mix) {
     mix.scripts([
         paths.jquery + "dist/jquery.js",
         paths.bootstrap + 'assets/javascripts/bootstrap.js',
+        paths.vue + 'dist/vue.js',
         'resources/assets/js/*.js'
     ], 'public/js/app.js');
 
