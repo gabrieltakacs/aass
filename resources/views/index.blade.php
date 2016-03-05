@@ -93,7 +93,7 @@
                         'country_id': this.selectedCountryId
                     };
 
-                    this.request = JSON.stringify(data);
+                    this.request = JSON.stringify(data, null, 2);
 
                     $.ajax({
                         type: 'GET',
@@ -103,7 +103,7 @@
                         async: true,
                         encode: true
                     }).done(function(data, textStatus, jqXHR) {
-                        obj.response = JSON.stringify(data);
+                        obj.response = JSON.stringify(data, null, 2);
                         obj.cities = data;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         obj.response = textStatus;
