@@ -29,11 +29,17 @@
         </div>
 
         <div class="col-xs-5 col-xs-offset-1">
-            <ul class="cities-list">
-                <li>Mesto 1</li>
-                <li>Mesto 2</li>
-                <li>Mesto 3</li>
-            </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">Vybrana krajina</div>
+
+                <ul class="list-group">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
         </div>
     </div>
 
