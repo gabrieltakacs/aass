@@ -29,18 +29,24 @@
         </div>
 
         <div class="col-xs-5 col-xs-offset-1">
-            <h2>tu bude zoznam miest pre aktualne vybrane miesto</h2>
+            <ul class="cities-list">
+                <li>Mesto 1</li>
+                <li>Mesto 2</li>
+                <li>Mesto 3</li>
+            </ul>
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-6">
+            <h3>AJAJ Request</h3>
             <pre>
                 tu bude request
             </pre>
         </div>
 
         <div class="col-xs-6">
+            <h3>AJAJ Response</h3>
             <pre>
                 tu bude response
             </pre>
