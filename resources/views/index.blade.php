@@ -41,16 +41,12 @@
         <div class="row">
             <div class="col-xs-6">
                 <h3>AJAJ Request</h3>
-            <pre>
-                tu bude request
-            </pre>
+            <pre>@{{ request }}</pre>
             </div>
 
             <div class="col-xs-6">
                 <h3>AJAJ Response</h3>
-            <pre>
-                tu bude response
-            </pre>
+            <pre>@{{ response }}</pre>
             </div>
         </div>
     </div>
@@ -60,9 +56,11 @@
             el: '#app',
             data: {
                 selectedCountryId: '<?= $countries->first()->id ?>',
-                cities: [],
+                cities: {!! json_encode($countries->first()->cities()->getResults()) !!},
                 countries: {!! json_encode($countries) !!},
-                cityInputName: ''
+                cityInputName: '',
+                request: '',
+                response: ''
             },
             methods: {
                 saveCity: function() {
@@ -70,6 +68,8 @@
                         'country_id': this.selectedCountryId,
                         'name': this.cityInputName
                     };
+
+                    this.request = JSON.stringify(data);
 
                     $.ajax({
                         type: 'POST',
@@ -79,6 +79,7 @@
                         async: true,
                         encode: true
                     }).done(function(data, textStatus, jqXHR) {
+                        obj.response = JSON.stringify(data);
                         obj.cities = data;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         console.log(textStatus);
