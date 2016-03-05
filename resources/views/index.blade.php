@@ -27,6 +27,24 @@
                 </fieldset>
             </form>
         </div>
+
+        <div class="col-xs-5 col-xs-offset-1">
+            <h2>tu bude zoznam miest pre aktualne vybrane miesto</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <pre>
+                tu bude request
+            </pre>
+        </div>
+
+        <div class="col-xs-6">
+            <pre>
+                tu bude response
+            </pre>
+        </div>
     </div>
 
     <script>
