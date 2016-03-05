@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [
+    'uses' => 'Controller@index',
+]);
 /*
 |--------------------------------------------------------------------------
 | Application Routes

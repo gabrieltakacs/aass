@@ -10,4 +10,21 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function index()
+    {
+        return view('index');
+    }
+
+    public function store(){
+
+        $place=new Place();
+
+        if(Input::has(''))
+            $place->aaa = Input::get("");
+
+        $place->save();
+
+        return self::index();
+    }
 }
