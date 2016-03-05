@@ -12,6 +12,7 @@
 
         </select>
 
+        <br>
         Town name:<br>
         <input type="text" name="name" placeholder="town name">
 

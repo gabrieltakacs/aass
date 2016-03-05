@@ -16,7 +16,6 @@ Route::get('/', [
 ]);
 
 Route::post('/store', [
-  //  'as' => 'search-suggest',
     'uses' => 'Controller@store'
 ]);
 
