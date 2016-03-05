@@ -16,7 +16,13 @@
 </head>
 <body>
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-<div class="container-fluid">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>JSON/AJAJ sample app</h1>
+        </div>
+    </div>
+
     @yield('content')
 </div>
 

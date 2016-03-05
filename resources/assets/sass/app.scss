@@ -1,2 +1,9 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
+.form-section {
+  padding: 0 0 10px 0;
+}
+
+label {
+  display: block;
+}
