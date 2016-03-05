@@ -59,7 +59,7 @@
         var obj = new Vue({
             el: '#app',
             data: {
-                selectedCountryId: '',
+                selectedCountryId: '<?= $countries->first()->id ?>',
                 cities: [],
                 countries: {!! json_encode($countries) !!},
                 cityInputName: ''
