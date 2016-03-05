@@ -14,6 +14,13 @@
 Route::get('/', [
     'uses' => 'Controller@index',
 ]);
+
+Route::post('/store', [
+  //  'as' => 'search-suggest',
+    'uses' => 'Controller@store'
+]);
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes

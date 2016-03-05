@@ -2,11 +2,24 @@
 
 @section('content')
 
-    <h3> Pridať miesto:</h3>
+    <form method="post" action="{{ action('Controller@store') }}">
 
-    <div class="buttonHolder">
-        {!! Form::submit('Submit',['class'=>'pull-right btn btn-primary'])!!}
-    </div>
+        <select name="country_id">
+
+            @foreach ($countries as $country)
+                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+            @endforeach
+
+        </select>
+
+        Town name:<br>
+        <input type="text" name="name" placeholder="town name">
+
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
 
 
 @endsection
