@@ -86,7 +86,7 @@
                     }).done(function(data, textStatus, jqXHR) {
                         obj.response = JSON.stringify(data, null, 2);
                         obj.cities = data;
-                        $("#message").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+                        $("#message").html('<div class="alert alert-success alert-dismissible" role="alert">' +
                                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                                 'Save successfull.</div>');
                     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -121,7 +121,6 @@
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
                     });
-                    console.log('country changed!');
                }
             }
         });
