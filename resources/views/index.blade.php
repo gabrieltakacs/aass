@@ -43,14 +43,14 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-6" v-if="request.length > 0">
                 <h3>AJAJ Request</h3>
-            <pre>@{{ request }}</pre>
+                <pre>@{{ request }}</pre>
             </div>
 
-            <div class="col-xs-6">
+            <div class="col-xs-6" v-if="response.length > 0">
                 <h3>AJAJ Response</h3>
-            <pre>@{{ response }}</pre>
+                <pre>@{{ response }}</pre>
             </div>
         </div>
     </div>
@@ -113,7 +113,7 @@
                         async: true,
                         encode: true
                     }).done(function(data, textStatus, jqXHR) {
-                        obj.response = JSON.stringify(data);
+                        obj.response = JSON.stringify(data, null, 2);
                         obj.cities = data.cities;
                         obj.selectedCountryName = data.country_name;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
