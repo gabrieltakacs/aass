@@ -20,6 +20,10 @@ class Controller extends BaseController
         return view('index',  ['countries' => $countries]);
     }
 
+    public function getCities() {
+        return response()->json(City::where('country_id', '=', Input::get("country_id"))->get());
+    }
+
     public function store(){
 
         $city=new City();

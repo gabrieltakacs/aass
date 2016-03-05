@@ -9,7 +9,7 @@
 
                     <div class="form-section">
                         <label for="country_select">Country:</label>
-                        <select name="country_id" id="country_select" class="form-control">
+                        <select name="country_id" id="country_select" class="form-control" onchange="loadCities()">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
@@ -32,7 +32,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Vybrana krajina</div>
 
-                <ul class="list-group">
+                <ul class="list-group" id="country_list">
                     <li class="list-group-item">Cras justo odio</li>
                     <li class="list-group-item">Dapibus ac facilisis in</li>
                     <li class="list-group-item">Morbi leo risus</li>
@@ -60,6 +60,23 @@
     </div>
 
     <script>
+        function loadCities() {
+            var formData = {
+                'country_id'        : $('select[name=country_id]').val()
+            };
+
+            $.ajax({
+                        type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
+                        url         : "{{ action('Controller@getCities') }}",
+                        data        : formData, // our data object
+                        dataType    : 'json', // what type of data do we expect back from the server
+                        encode          : true
+                    })
+                    .done(function(data) {
+                        console.log(JSON.stringify(data, null, 2));
+                    });
+        }
+
         $(document).ready(function() {
             $('form').submit(function(event) {
                 var formData = {

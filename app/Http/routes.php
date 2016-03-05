@@ -19,6 +19,10 @@ Route::post('/store', [
     'uses' => 'Controller@store'
 ]);
 
+Route::get('/getCities', [
+    'uses' => 'Controller@getCities',
+]);
+
 
 /*
 |--------------------------------------------------------------------------
