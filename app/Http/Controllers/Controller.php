@@ -24,8 +24,7 @@ class Controller extends BaseController
 
         $city=new City();
 
-        if(Input::has('country_id'))
-            $city->country_id = Input::get("country_id");
+        $city->country_id = Input::get("country_id");
 
         if(Input::has('name'))
             $city->name = Input::get("name");
