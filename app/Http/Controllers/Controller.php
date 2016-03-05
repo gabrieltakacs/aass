@@ -27,8 +27,8 @@ class Controller extends BaseController
     public function store()
     {
         /** @var \App\Country $country */
-        $country = Country::find(Input::get('country_id'))->first();
-
+        $country = Country::where('id','=',Input::get('country_id'))->first();
+        error_log($country);
         if (!is_null($country)) {
             $city = new City();
             $city->country()->associate($country);

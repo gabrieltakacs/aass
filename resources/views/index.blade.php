@@ -23,6 +23,10 @@
                         <div class="form-section">
                             <input type="submit" value="Save" class="btn btn-primary">
                         </div>
+
+                        <div id="message">
+
+                        </div>
                     </fieldset>
                 </form>
             </div>
@@ -69,7 +73,7 @@
                         'name': this.cityInputName
                     };
 
-                    this.request = JSON.stringify(data);
+                    this.request = JSON.stringify(data, null, 2);
 
                     $.ajax({
                         type: 'POST',
@@ -79,10 +83,16 @@
                         async: true,
                         encode: true
                     }).done(function(data, textStatus, jqXHR) {
-                        obj.response = JSON.stringify(data);
+                        obj.response = JSON.stringify(data, null, 2);
                         obj.cities = data;
+                        $("#message").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                                'Save successfull.</div>');
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         obj.response = textStatus;
+                        $("#message").html('<div class="alert alert-danger alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                                'Error while saving.</div>');
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
                     });
