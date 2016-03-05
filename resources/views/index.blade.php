@@ -82,26 +82,31 @@
                         obj.response = JSON.stringify(data);
                         obj.cities = data;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus);
+                        obj.response = textStatus;
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
                     });
 
                 },
                 countryChanged: function() {
+                    var data = {
+                        'country_id': this.selectedCountryId
+                    };
+
+                    this.request = JSON.stringify(data);
+
                     $.ajax({
                         type: 'GET',
                         url: "{{ action('Controller@getCities') }}",
-                        data: {
-                            'country_id': this.selectedCountryId
-                        },
+                        data: data,
                         dataType: 'json',
                         async: true,
                         encode: true
                     }).done(function(data, textStatus, jqXHR) {
+                        obj.response = JSON.stringify(data);
                         obj.cities = data;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus);
+                        obj.response = textStatus;
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
                     });
