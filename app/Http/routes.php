@@ -12,29 +12,38 @@
 */
 
 Route::get('/', [
-    'uses' => 'Controller@index',
+    'uses' => 'IndexController@homepage',
+    'as' => 'homepage'
 ]);
-
-Route::post('/store', [
-    'uses' => 'Controller@store'
-]);
-
-Route::get('/getCities', [
-    'uses' => 'Controller@getCities',
-]);
-
 
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
+ * AJAJ Controller
+ */
+Route::get('/ajaj', [
+    'uses' => 'AjajController@index',
+    'as' => 'ajaj'
+]);
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+Route::post('/ajaj/store', [
+    'uses' => 'AjajController@store'
+]);
+
+Route::get('/ajaj/cities', [
+    'uses' => 'AjajController@cities',
+]);
+
+/*
+ * AJAX Controller
+ */
+Route::get('/ajax', [
+    'uses' => 'AjaxController@index',
+    'as' => 'ajax'
+]);
+
+Route::post('/ajax/store', [
+    'uses' => 'AjaxController@store'
+]);
+
+Route::get('/ajax/cities', [
+    'uses' => 'AjaxController@cities',
+]);

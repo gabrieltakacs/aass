@@ -4,14 +4,14 @@
     <div id="app">
         <div class="row">
             <div class="col-xs-5">
-                <form method="post" action="{{ action('Controller@store') }}" v-on:submit.prevent="saveCity();">
+                <form method="post" action="{{ action('AjajController@store') }}" v-on:submit.prevent="saveCity();">
                     <fieldset>
                         <legend>Add city</legend>
 
                         <div class="form-section">
                             <label for="country_select">Country:</label>
                             <select name="country_id" id="country_select" class="form-control" v-model="selectedCountryId" v-on:change="countryChanged();">
-                                    <option v-for="country in countries" value="@{{ country.id }}">@{{country.name}}</option>
+                                <option v-for="country in countries" value="@{{ country.id }}">@{{country.name}}</option>
                             </select>
                         </div>
 
@@ -44,7 +44,7 @@
 
         <div class="row">
             <div class="col-xs-6" v-if="request.length > 0">
-                <h3>AJAJ Request</h3>
+                <h3>Request</h3>
                 <pre>@{{ request }}</pre>
             </div>
 
@@ -78,7 +78,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: "{{ action('Controller@store') }}",
+                        url: "{{ action('AjajController@store') }}",
                         data: data,
                         dataType: 'json',
                         async: true,
@@ -108,7 +108,7 @@
 
                     $.ajax({
                         type: 'GET',
-                        url: "{{ action('Controller@getCities') }}",
+                        url: "{{ action('AjajController@cities') }}",
                         data: data,
                         dataType: 'json',
                         async: true,
@@ -118,15 +118,13 @@
                         obj.cities = data.cities;
                         obj.selectedCountryName = data.country_name;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
-                        obj.response = textStatus;
+                        obj.response = textStatus + '\n' + errorThrown;
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
                     });
-               }
+                }
             }
         });
-
-
     </script>
 
 @endsection

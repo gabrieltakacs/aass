@@ -16,13 +16,28 @@
 </head>
 <body>
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>JSON/AJAJ sample app</h1>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">AJAX / AJAJ / JSON example</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ route('homepage') }}">Home</a></li>
+                <li><a href="{{ route('ajax') }}">AJAX</a></li>
+                <li><a href="{{ route('ajaj') }}">AJAJ</a></li>
+            </ul>
         </div>
     </div>
+</nav>
 
+<div class="container">
     @yield('content')
 </div>
 
