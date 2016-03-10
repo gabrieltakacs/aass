@@ -74,8 +74,39 @@
                         'name': this.cityInputName
                     };
 
-                    this.request = JSON.stringify(data, null, 2);
+                    var method = "POST";
+                    var url = "{{ action('AjaxController@store') }}";
+                    var params = 'country_id='+this.selectedCountryId+'&name='+this.cityInputName;
 
+                    this.request = method+" "+url+"?"+params+"\n\n"+JSON.stringify(data, null, 2);
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (xhttp.readyState == 4 && xhttp.status == 200) {
+                            var xml = xhttp.responseXML.getElementsByTagName('data')[0];
+                            var json_data = [];
+                            var cities = xml.getElementsByTagName('city');
+                            for (var i = 0; i < cities.length; i++) {
+                                var city = {
+                                    name: cities[i].innerHTML
+                                };
+
+                                json_data.push(city);
+                            }
+
+                            obj.response =  formatXml(new XMLSerializer().serializeToString(xml));
+
+                            obj.cities = json_data;
+                            obj.cityInputName = '';
+                            $("#message").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+                                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                                    'Save successfull.</div>');
+                        }
+                    };
+                    xhttp.open(method, url, true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send(params);
+/*
                     $.ajax({
                         type: 'POST',
                         url: "{{ action('AjaxController@store') }}",
@@ -109,16 +140,42 @@
                                 'Error while saving.</div>');
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
-                    });
+                    });*/
                 },
                 countryChanged: function() {
                     var data = {
                         'country_id': this.selectedCountryId
                     };
+                    var url = "{{ action('AjaxController@cities') }}?country_id="+this.selectedCountryId;
 
-                    this.request = JSON.stringify(data, null, 2);
+                    this.request = "GET "+url+"\n\n"+JSON.stringify(data, null, 2);
 
-                    $.ajax({
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("GET", url, true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.onreadystatechange = function() {
+                        if (xhttp.readyState == 4 && xhttp.status == 200) {
+                            var xml = xhttp.responseXML.getElementsByTagName('data')[0];
+                            obj.selectedCountryName = xml.getAttribute('country_name');
+
+                            var json_data = [];
+                            var cities = xml.getElementsByTagName('city');
+                            for (var i = 0; i < cities.length; i++) {
+                                var city = {
+                                    name: cities[i].innerHTML
+                                };
+
+                                json_data.push(city);
+                            }
+
+                            obj.cities = json_data;
+
+                            obj.response =  formatXml(new XMLSerializer().serializeToString(xml));
+                        }
+                    };
+                    xhttp.send();
+
+               /*     $.ajax({
                         type: 'GET',
                         url: "{{ action('AjaxController@cities') }}",
                         data: data,
@@ -145,10 +202,41 @@
                         obj.response = textStatus + '\n' + errorThrown;
                     }).always(function(data, textStatus, errorThrown) {
                         console.log(data);
-                    });
+                    });*/
                 }
             }
         });
+
+        function formatXml(xml) {
+            var formatted = '';
+            var reg = /(>)(<)(\/*)/g;
+            xml = xml.replace(reg, '$1\r\n$2$3');
+            var pad = 0;
+            jQuery.each(xml.split('\r\n'), function(index, node) {
+                var indent = 0;
+                if (node.match( /.+<\/\w[^>]*>$/ )) {
+                    indent = 0;
+                } else if (node.match( /^<\/\w/ )) {
+                    if (pad != 0) {
+                        pad -= 1;
+                    }
+                } else if (node.match( /^<\w[^>]*[^\/]>.*$/ )) {
+                    indent = 1;
+                } else {
+                    indent = 0;
+                }
+
+                var padding = '';
+                for (var i = 0; i < pad; i++) {
+                    padding += '  ';
+                }
+
+                formatted += padding + node + '\r\n';
+                pad += indent;
+            });
+
+            return formatted;
+        }
     </script>
 
 @endsection
